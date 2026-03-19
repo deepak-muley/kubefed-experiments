@@ -1,0 +1,18 @@
+apiVersion: types.kubefed.io/v1beta1
+kind: FederatedService
+metadata:
+  name: nginx
+  namespace: demo-app
+spec:
+  template:
+    spec:
+      type: NodePort
+      ports:
+        - port: 80
+          targetPort: 80
+          nodePort: 30080
+          name: http
+      selector:
+        app: nginx
+  placement:
+    clusterSelector: {}

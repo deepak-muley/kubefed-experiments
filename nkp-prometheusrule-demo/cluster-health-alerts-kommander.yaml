@@ -1,0 +1,19 @@
+# Example PrometheusRule for NKP - create on management cluster, then federate
+# Target namespace: kommander (use only if federated to workload clusters)
+# Use with: kubectl apply -f cluster-health-alerts-kommander.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cluster-health-alerts
+  namespace: kommander
+spec:
+  groups:
+    - name: cluster-health
+      rules:
+        - alert: ClusterHealthCheck
+          expr: vector(1)
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            message: "Custom federated alert - cluster health check (NKP)"

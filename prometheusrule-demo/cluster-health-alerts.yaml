@@ -1,0 +1,17 @@
+# Example PrometheusRule - create on management cluster, then federate
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cluster-health-alerts
+  namespace: demo-app
+spec:
+  groups:
+    - name: cluster-health
+      rules:
+        - alert: ClusterHealthCheck
+          expr: vector(1)
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            message: "Custom federated alert - cluster health check"

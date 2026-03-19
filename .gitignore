@@ -1,0 +1,10 @@
+# Binaries
+bin/
+*.tgz
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*.swo

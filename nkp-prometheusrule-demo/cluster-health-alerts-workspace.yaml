@@ -1,0 +1,20 @@
+# Example PrometheusRule for NKP workload clusters - use your workspace namespace
+# The workspace namespace must be federated to workload clusters.
+# Use with: TARGET_NAMESPACE=my-workspace ./scripts/run-prometheusrule-nkp.sh
+# Replace 'my-workspace' with your actual workspace namespace (from nkp get workspaces)
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: cluster-health-alerts
+  namespace: my-workspace
+spec:
+  groups:
+    - name: cluster-health
+      rules:
+        - alert: ClusterHealthCheck
+          expr: vector(1)
+          for: 1m
+          labels:
+            severity: warning
+          annotations:
+            message: "Custom federated alert - cluster health check (NKP)"

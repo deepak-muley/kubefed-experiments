@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-file
+  namespace: demo-app
+data:
+  index.html: "Hello from KubeFed! This app is federated across clusters."
